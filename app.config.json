@@ -1,0 +1,10 @@
+{
+  "name": "app-service-uc",
+  "protocol": "http:",
+  "host": "localhost",
+  "port": "6105",
+  "cloudHub": "http://localhost:6080",
+  "username": "test",
+  "password": "123456",
+  "configPath": ""
+}
