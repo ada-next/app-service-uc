@@ -1,17 +1,24 @@
-const Server = require("ada-cloud-boot");
-const router = require("./src/router");
-const { Boost, Service } = require("./helper/sql");
 const Path = require("path");
+const Server = require("./src/index");
+const { Booster, Service } = require("ada-cloud-util/boot");
+const { SyncFile } = require("ada-util");
 
 let server = new Server();
-server.use(router.routes());
 server.on('configchange', () => {
     let { db } = server.config;
-    Boost.update(db);
+    Booster.updateDatabase(db);
 });
 server.on('started', () => {
 });
 server.startup(({ context, config }) => {
     context.Service = Service;
-    return Boost.scan(Path.relative(__dirname, "./src"), config.db);
+    context.keys = {
+        private: new SyncFile(Path.resolve(__dirname, "./keys/rsa.private")).read(),
+        public: new SyncFile(Path.resolve(__dirname, "./keys/rsa.public")).read()
+    };
+    return Booster.boot({
+        source: Path.relative(__dirname, "./src"),
+        database: config.db,
+        koa: server
+    });
 });

@@ -1,4 +1,4 @@
-const { Service } = require("ada-cloud-util/sql");
+const { Service } = require("ada-cloud-util/boot");
 
 class UserService extends Service {
     static configure() {
@@ -10,8 +10,12 @@ class UserService extends Service {
     }
 
     login(username, password) {
-        return this.connect.execute('select * from task').then(result => {
-            return result[0].map(a => a.id);
+        return this.connect.query('select username,password from user where username=? and password=?', [username, password]).then(result => {
+            if (result.length > 0) {
+                return result[0][0];
+            } else {
+                return null;
+            }
         });
     }
 }
