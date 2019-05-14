@@ -1,4 +1,4 @@
-const { Service } = require("ada-cloud-util/boot");
+const { Service } = require("ada-cloud-util/boost");
 
 class UserService extends Service {
     static configure() {

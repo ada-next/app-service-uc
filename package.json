@@ -7,8 +7,8 @@
   "author": "WangJinliang(hou80houzhu)",
   "license": "MIT",
   "dependencies": {
-    "ada-cloud-boot": "0.0.12",
-    "ada-cloud-util": "0.0.6",
+    "ada-cloud-hub": "latest",
+    "ada-cloud-util": "latest",
     "ada-util": "^1.0.0-beta.4",
     "mysql2": "^1.6.5"
   }

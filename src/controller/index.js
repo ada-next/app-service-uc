@@ -1,5 +1,5 @@
 const PrivateVerifiyer = require("ada-cloud-util/verifier/private");
-const { Controller } = require("ada-cloud-util/boot");
+const { Controller } = require("ada-cloud-util/boost");
 
 class TextController extends Controller {
     static configure() {
