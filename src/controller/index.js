@@ -6,12 +6,13 @@ class TextController extends Controller {
         basePath: "",
         actions: {
             login: { path: "/login", method: 'get' }
-        }
+        },
+        service: 'userService'
     }
 
-    login({ Service, request, keys }) {
+    login({ request, keys }) {
         let { username, password } = request.query;
-        return Service.getService("userService").login(username, password).then(result => {
+        return this.service.login(username, password).then(result => {
             console.log(result);
             if (result) {
                 let k = {};
