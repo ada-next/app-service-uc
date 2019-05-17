@@ -1,12 +1,12 @@
-const { Model } = require("ada-cloud-util/boost");
+const { Model, Types } = require("ada-cloud-util/boost");
 
 class UserModel extends Model {
     static configure = {
         table: 'user',
         fields: {
-            id: { prime: true },
-            username: { type: String },
-            password: { type: String }
+            id: { prime: true, type: Types.STRING },
+            username: { type: Types.STRING },
+            password: { type: Types.STRING }
         }
     }
 }

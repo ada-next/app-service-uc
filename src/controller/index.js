@@ -12,7 +12,7 @@ class TextController extends Controller {
 
     login({ request, keys }) {
         let { username, password } = request.query;
-        return this.service.login(username, password).then(result => {
+        return this.userService.login(username, password).then(result => {
             console.log(result);
             if (result) {
                 let k = {};
