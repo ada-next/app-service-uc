@@ -1,5 +1,7 @@
 const { Service } = require("ada-cloud-util/boost");
 const UserModel = require("../model/user");
+const PermisionModel = require("./../model/permision");
+const UserTreeModel = require("./../model/user_tree");
 
 class UserService extends Service {
     static configure() {
@@ -12,7 +14,9 @@ class UserService extends Service {
                 addUser: { transaction: false },
                 editUserInfo: { transaction: false },
                 editPassword: { transaction: false },
-                getAllUsers: { transaction: false }
+                getAllUsers: { transaction: false },
+                getAllPermisionMap: { transaction: false },
+                addUserTreeNode: { transaction: false },
             }
         }
     }
@@ -71,6 +75,65 @@ class UserService extends Service {
                 return Promise.reject('user can not found,password not equal');
             }
         });
+    }
+
+    getAllPermisionMap() {
+        let permision = new PermisionModel(), _list = [], _map = {};
+        return this.dao.findAll(permision).then(list => {
+            list.map(item => {
+                let info = {
+                    id: item.id,
+                    name: item.actionName,
+                    parent: item.actionParentId,
+                    time: item.createTime,
+                    page: item.actionPage,
+                    path: item.actionPath,
+                    icon: item.actionIcon || '',
+                    list: []
+                };
+                _map[item.id] = info;
+                return info;
+            }).forEach(item => {
+                let { parent } = item;
+                if (!parent) {
+                    _list.push(item);
+                } else {
+                    _map[parent].list.push(item);
+                }
+            });
+            return _list;
+        });
+    }
+
+    getAllUserTree() {
+        let userTree = new UserTreeModel(), _list = [], _map = {};
+        return this.dao.findAll(userTree).then(list => {
+            list.map(item => {
+                console.log(item);
+                let info = {
+                    id: item.id,
+                    name: item.nodeName,
+                    parent: item.parentNodeId,
+                    time: item.createTime,
+                    list: []
+                };
+                _map[item.id] = info;
+                return info;
+            }).forEach(item => {
+                let { parent } = item;
+                if (!parent) {
+                    _list.push(item);
+                } else {
+                    _map[parent].list.push(item);
+                }
+            });
+            return _list;
+        });
+    }
+
+    addUserTreeNode({ nodeName, nodeDesc, parentNodeId }) {
+        let userTree = new UserTreeModel({ nodeName, nodeDesc, parentNodeId });
+        return this.dao.insert(userTree);
     }
 }
 

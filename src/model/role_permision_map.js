@@ -1,8 +1,8 @@
 const { Model, Types } = require("ada-cloud-util/boost");
 
-class RoleActionMapModel extends Model {
+class RolePermisionMapModel extends Model {
     static configure = {
-        table: 'role_action_map',
+        table: 'role_permision_map',
         fields: {
             id: { prime: true, type: Types.STRING },
             roleId: { type: Types.STRING, field: 'role_id' },
@@ -12,4 +12,4 @@ class RoleActionMapModel extends Model {
     }
 }
 
-module.exports = RoleActionMapModel;
+module.exports = RolePermisionMapModel;

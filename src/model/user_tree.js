@@ -7,7 +7,7 @@ class UserTreeModel extends Model {
             id: { prime: true, type: Types.STRING },
             nodeName: { type: Types.STRING, field: 'node_name' },
             nodeDesc: { type: Types.STRING, field: 'node_desc' },
-            parentNodeId: { type: Types.STRING, field: 'parent_action_id' },
+            parentNodeId: { type: Types.STRING, field: 'parent_node_id' },
             createTime:{ type: Types.DATE, field: 'create_time' }
         }
     }

@@ -8,7 +8,10 @@ class TextController extends Controller {
             login: { path: "/login", method: 'get' },
             hasUser: { path: "/has", method: 'get' },
             getUserList: { path: "/list", method: 'get' },
-            addUser: { path: "/add", method: "post" }
+            addUser: { path: "/add", method: "post" },
+            getAllPermision: { path: "/permisions", method: 'get' },
+            getAllUserTree: { path: "/tree", method: 'get' },
+            addUserTreeNode: { path: "/tree/add", method: "post" },
         },
         service: 'userService'
     }
@@ -36,8 +39,21 @@ class TextController extends Controller {
         return this.userService.addUser(info).then(a => this.success(a));
     }
 
-    getUserList() {
-        return this.userService.getAllUsers().then(a => this.success(a));
+    getUserList({ request }) {
+        let { from, size } = request.query;
+        return this.userService.getAllUsers(from, size).then(a => this.success(a));
+    }
+
+    getAllPermision() {
+        return this.userService.getAllPermisionMap().then(a => this.success(a));
+    }
+
+    getAllUserTree() {
+        return this.userService.getAllUserTree().then(a => this.success(a));
+    }
+
+    addUserTreeNode({ request }) {
+        return this.userService.addUserTreeNode(request.body).then(a => this.success(a));
     }
 }
 
