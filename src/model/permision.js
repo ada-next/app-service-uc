@@ -16,4 +16,4 @@ class PermisionModel extends Model {
     }
 }
 
-module.exports = PermisionModel;
+module.exports = PermisionModel; 

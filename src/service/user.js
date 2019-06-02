@@ -105,11 +105,10 @@ class UserService extends Service {
         });
     }
 
-    getAllUserTree() {
+    getAllUserTree() { 
         let userTree = new UserTreeModel(), _list = [], _map = {};
         return this.dao.findAll(userTree).then(list => {
             list.map(item => {
-                console.log(item);
                 let info = {
                     id: item.id,
                     name: item.nodeName,

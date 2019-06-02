@@ -6,7 +6,7 @@ class RolePermisionMapModel extends Model {
         fields: {
             id: { prime: true, type: Types.STRING },
             roleId: { type: Types.STRING, field: 'role_id' },
-            actionId: { type: Types.STRING, field: 'action_id' },
+            actionIds: { type: Types.STRING, field: 'action_ids' },
             createTime:{ type: Types.DATE, field: 'create_time' }
         }
     }
