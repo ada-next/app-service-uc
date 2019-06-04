@@ -23,13 +23,7 @@ class UserService extends Service {
 
     login({ username, password }) {
         let userModel = new UserModel({ username, password });
-        return this.dao.find(userModel).then(target => {
-            if (target) {
-                return this.dao.query(``);
-            } else {
-                return Promise.reject('username or password is not exist');
-            }
-        });
+        return this.dao.find(userModel);
     }
 
     hasUserByUsername(username) {
@@ -105,7 +99,7 @@ class UserService extends Service {
         });
     }
 
-    getAllUserTree() { 
+    getAllUserTree() {
         let userTree = new UserTreeModel(), _list = [], _map = {};
         return this.dao.findAll(userTree).then(list => {
             list.map(item => {

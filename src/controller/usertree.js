@@ -4,7 +4,7 @@ class UserTreeController extends Controller {
     static configure = {
         basePath: "/usertree",
         actions: {
-            getPermisionMap: { path: "/map", method: "get" },
+            getAllUserTree: { path: "/map", method: "get" },
             addUserTreeNode: { path: "/add", method: "post" },
             removeUserTreeNode: { path: "/edit", method: "post" },
             editUserTreeNode: { path: "/remove", method: "post" }
